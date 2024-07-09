@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /app/credentials/test-develop-80a95-SC.json
+      FIREBASE_STORAGE_BUCKET: gs://test-develop-80a95.appspot.com
+    ports:
+      - "3000:3000"
