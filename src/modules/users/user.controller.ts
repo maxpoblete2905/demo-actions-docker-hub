@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nes
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
-import { TokenGuard } from 'src/auth/auth.strategy';
+import { TokenGuard } from 'src/modules/auth/auth.strategy';
 import { User } from './interface/register-user.entity'; // Asegúrate de importar User adecuadamente
 
 @ApiTags('users')

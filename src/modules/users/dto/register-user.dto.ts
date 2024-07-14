@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsArray, ValidateNested, IsObject, IsOptional, ArrayMinSize, IsBoolean, Length } from 'class-validator';
 import { Type } from 'class-transformer';
-import { WorkPlaceDTO } from '../dto/work-place';
+import { WorkPlaceDTO } from './work-place.dto';
 import { CareTypeDto } from '../dto/care-type.dto';
 import { ApiProperty } from '@nestjs/swagger';
 

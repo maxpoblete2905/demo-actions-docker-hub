@@ -1,5 +1,5 @@
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
-import { CreateUserFirebaseDto } from "../dto/register-user.dto";
+import { CreateUserFirebaseDto } from "../dto/register-user.firebase.dto";
 
 export interface AuthOperations {
 

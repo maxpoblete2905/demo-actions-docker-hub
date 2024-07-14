@@ -3,7 +3,7 @@ import { RegisterUserDto } from '../dto/register-user.dto';
 import { User } from './register-user.entity';
 
 export interface IUserService {
-    create(createUserDto: RegisterUserDto): Promise<User>;
+    create(createUserDto: User): Promise<User>;
 
     findAll(): Promise<User[]>;
 

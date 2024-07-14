@@ -1,8 +1,10 @@
 import { Controller, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger'; // Importa las decoraciones necesarias
-import { CreateUserFirebaseDto } from './dto/register-user.dto';
 import { TokenGuard } from './auth.strategy';
+import { UserRecord } from 'firebase-admin/lib/auth/user-record';
+import { CreateRequest } from 'firebase-admin/lib/auth/auth-config';
+import { CreateUserFirebaseDto } from './dto/register-user.firebase.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -12,8 +14,8 @@ export class AuthController {
     @Post('register')
     @ApiOperation({ summary: 'Register a new user in firebase autentication' }) // Descripción del endpoint en Swagger
     @ApiBody({ type: CreateUserFirebaseDto }) // Especifica el tipo de cuerpo (body) esperado en Swagger
-    @UseGuards(TokenGuard)
-    async register(@Body() registerUserDto: CreateUserFirebaseDto) {
+    // @UseGuards(TokenGuard)
+    async register(@Body() registerUserDto: CreateRequest): Promise<UserRecord> {
         return await this.authService.crearteUserAccessFirebase(registerUserDto);
     }
 

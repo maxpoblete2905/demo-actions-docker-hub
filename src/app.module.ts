@@ -1,10 +1,10 @@
 // AppModule
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { FirebaseModule } from './firebase/firebase.module';
-import { StorageModule } from './storage/storage.module';
-import { UsersModule } from './users/user.module';
+import { StorageModule } from './modules/storage/storage.module';
+import { UsersModule } from './modules/users/user.module';
 
 @Module({
   imports: [

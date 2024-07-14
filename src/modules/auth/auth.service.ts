@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserFirebaseDto } from './dto/register-user.dto';
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { FirebaseAuthService } from 'src/firebase/firebase-auth.service';
 import { AuthOperations } from './interface/auth.interface';
+import { CreateRequest } from 'firebase-admin/lib/auth/auth-config';
 
 @Injectable()
 export class AuthService implements AuthOperations {
@@ -14,13 +14,12 @@ export class AuthService implements AuthOperations {
     throw new Error('Method not implemented.');
   }
 
-  crearteUserAccessFirebase(userRecord: CreateUserFirebaseDto): Promise<UserRecord> {
+  crearteUserAccessFirebase(userRecord: CreateRequest): Promise<UserRecord> {
     return this.firebaseAuthService.createUser(userRecord);
   }
 
   checkEmailExistence(email: string): Promise<boolean> {
     return this.firebaseAuthService.checkEmailExistence(email)
   }
-
 
 }

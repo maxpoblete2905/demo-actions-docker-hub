@@ -1,5 +1,3 @@
-// register-user.entity.ts
-
 import { WorkPlace } from './work-place';
 import { CareType } from './care-type';
 

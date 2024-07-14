@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { FirebaseConfigService } from './firebase-config.service';
 import { FirebaseQueryService } from './firebase-firestore.service';
 import { FirebaseStorageService } from './firebase-storage.service';
-import { FirebaseException } from './firebase-exception.service';
+import { FirebaseAuthService } from './firebase-auth.service';
 
 @Module({
   imports: [ConfigModule],
@@ -12,13 +12,13 @@ import { FirebaseException } from './firebase-exception.service';
     FirebaseConfigService,
     FirebaseQueryService,
     FirebaseStorageService,
-    FirebaseException
+    FirebaseAuthService
   ],
   exports: [
     FirebaseConfigService,
     FirebaseQueryService,
     FirebaseStorageService,
-    FirebaseException
+    FirebaseAuthService
   ],
 })
 export class FirebaseModule { }

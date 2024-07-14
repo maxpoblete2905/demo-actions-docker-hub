@@ -7,7 +7,7 @@ async function bootstrap() {
 
   // Configurar CORS
   app.enableCors({
-    origin: 'http://localhost:4200', // Reemplaza con tu origen permitido
+    origin: ['http://localhost:4200', 'urldev:4200', 'prod'], // Reemplaza con tu origen permitido
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Permite incluir cookies en las solicitudes (si aplica)
   });
@@ -19,7 +19,9 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth() // Añade autenticación Bearer si es necesario
     .addTag('users') // Puedes agregar tags para categorizar tus endpoints
+    .addServer('http://localhost:3000', 'Local Development Server') // Añade la URL base de tu API
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
