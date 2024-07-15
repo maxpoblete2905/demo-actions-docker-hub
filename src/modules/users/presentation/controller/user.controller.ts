@@ -1,25 +1,34 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserService } from '../../aplications/services/user.service';
-import { CreateUserDto } from '../../aplications/dtos/create-user.dto';
+import { CreateUserDto } from '../../applications/dtos/create-user.dto';
+import { UserService } from '../../applications/services/user.service';
+import { User } from '../../domain/entities/create-user.entity';
 import { TokenGuard } from '../../../../common/guards/firebase-custom-token.guard';
 import { RolesGuard } from '../../../../common/guards/roles.guard';
 import { Roles } from '../../../../common/decorators/roles.decorator';
-import { User } from '../../domain/entities/create-user.entity'; // Asegúrate de importar User adecuadamente
+import {
+    ForbiddenResponse,
+    UserCreatedResponse,
+    UsersReturnedResponse,
+    UserReturnedResponse,
+    UserUpdatedResponse,
+    UserDeletedResponse,
+    UserNotFoundResponse,
+} from '../swagger/swagger.responses';
 
 @ApiTags('users')
 @ApiBearerAuth()
 @Controller('users')
-@UseGuards(TokenGuard, RolesGuard) // Aplicar guards a nivel de controlador
+@UseGuards(TokenGuard, RolesGuard)
 export class UsersController {
     constructor(private readonly userService: UserService) { }
 
     @Post()
     @UseGuards(RolesGuard)
-    @Roles('admin')  // Solo los usuarios con rol 'admin' pueden acceder a esta ruta
+    @Roles('admin')
     @ApiOperation({ summary: 'Create user' })
-    @ApiResponse({ status: 201, description: 'The user has been successfully created.' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
+    @ApiResponse(UserCreatedResponse)
+    @ApiResponse(ForbiddenResponse)
     async create(@Body() registerUserDto: CreateUserDto): Promise<User> {
         return this.userService.createUser(registerUserDto);
     }
@@ -28,8 +37,8 @@ export class UsersController {
     @UseGuards(RolesGuard)
     @Roles('admin', 'user')  // Los usuarios con rol 'admin' o 'user' pueden acceder a esta ruta
     @ApiOperation({ summary: 'Get all users' })
-    @ApiResponse({ status: 200, description: 'Return all users.' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
+    @ApiResponse(UsersReturnedResponse)
+    @ApiResponse(ForbiddenResponse)
     async findAll(): Promise<User[]> {
         return this.userService.findUsers();
     }
@@ -37,10 +46,10 @@ export class UsersController {
     @Get(':id')
     @UseGuards(RolesGuard)
     @Roles('admin', 'user')  // Los usuarios con rol 'admin' o 'user' pueden acceder a esta ruta
-    @ApiOperation({ summary: 'Get user by DNI' })
-    @ApiResponse({ status: 200, description: 'Return the user with the given DNI.' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
-    @ApiResponse({ status: 404, description: 'User not found.' })
+    @ApiOperation({ summary: 'Get user by ID' })
+    @ApiResponse(UserReturnedResponse)
+    @ApiResponse(ForbiddenResponse)
+    @ApiResponse(UserNotFoundResponse)
     async findOne(@Param('id') id: string): Promise<User> {
         return this.userService.findUserById(id);
     }
@@ -49,18 +58,18 @@ export class UsersController {
     @UseGuards(RolesGuard)
     @Roles('admin')  // Solo los usuarios con rol 'admin' pueden acceder a esta ruta
     @ApiOperation({ summary: 'Update user' })
-    @ApiResponse({ status: 200, description: 'The user has been successfully updated.' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
-    async update(@Body() registerUserDto: CreateUserDto, @Param('id') id: string): Promise<User> {
-        return this.userService.updateUser(id, registerUserDto);
+    @ApiResponse(UserUpdatedResponse)
+    @ApiResponse(ForbiddenResponse)
+    async update(@Body() updateUserDto: CreateUserDto, @Param('id') id: string): Promise<User> {
+        return this.userService.updateUser(id, updateUserDto);
     }
 
     @Delete(':dni')
     @UseGuards(RolesGuard)
     @Roles('admin')  // Solo los usuarios con rol 'admin' pueden acceder a esta ruta
     @ApiOperation({ summary: 'Delete user by DNI' })
-    @ApiResponse({ status: 200, description: 'The user has been successfully deleted.' })
-    @ApiResponse({ status: 403, description: 'Forbidden.' })
+    @ApiResponse(UserDeletedResponse)
+    @ApiResponse(ForbiddenResponse)
     async remove(@Param('dni') dni: string): Promise<boolean> {
         return this.userService.deleteUser(dni);
     }

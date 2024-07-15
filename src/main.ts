@@ -18,9 +18,12 @@ async function bootstrap() {
     .setDescription('API description')
     .setVersion('1.0')
     .addBearerAuth() // Añade autenticación Bearer si es necesario
-    .addTag('users') // Puedes agregar tags para categorizar tus endpoints
+    .addTag('users', 'Endpoints relacionados con usuarios') // Tag para usuarios
+    .addTag('auth', 'Endpoints relacionados con autenticación') // Tag para autenticación
+    .addTag('profile', 'Endpoints relacionados con perfiles de usuario') // Tag para perfiles de usuario
     .addServer('http://localhost:3000', 'Local Development Server') // Añade la URL base de tu API
     .build();
+
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
