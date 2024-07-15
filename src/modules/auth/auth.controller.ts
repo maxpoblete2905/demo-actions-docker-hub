@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger'; // Importa las decoraciones necesarias
-import { TokenGuard } from './auth.strategy';
+import { TokenGuard } from '../../common/guards/firebase-custom-token.guard';
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { CreateRequest } from 'firebase-admin/lib/auth/auth-config';
 import { CreateUserFirebaseDto } from './dto/register-user.firebase.dto';

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
-import { FirebaseAuthService } from 'src/firebase/firebase-auth.service';
+import { FirebaseAuthService } from 'src/config/firebase/firebase-auth.service';
 import { AuthOperations } from './interface/auth.interface';
 import { CreateRequest } from 'firebase-admin/lib/auth/auth-config';
 

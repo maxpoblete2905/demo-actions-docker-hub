@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FirebaseStorageService } from 'src/firebase/firebase-storage.service';
+import { FirebaseStorageService } from 'src/config/firebase/firebase-storage.service';
 
 @Injectable()
 export class StorageService {
