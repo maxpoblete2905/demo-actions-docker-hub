@@ -1,7 +1,7 @@
 import { WorkPlace } from './work-place';
 import { CareType } from './care-type';
 
-export interface User {
+export class User {
     dni?: string;
     fullName: string;
     medicalRegistryNumber: string;

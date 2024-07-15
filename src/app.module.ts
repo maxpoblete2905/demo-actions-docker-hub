@@ -2,9 +2,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
-import { FirebaseModule } from './firebase/firebase.module';
+import { FirebaseModule } from './config/firebase/firebase.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { UsersModule } from './modules/users/user.module';
+import { APP_FILTER } from '@nestjs/core';
+import { UserExceptionFilter } from './common/filters/http-exception.filter';
 
 @Module({
   imports: [
@@ -20,7 +22,12 @@ import { UsersModule } from './modules/users/user.module';
     StorageModule,
     UsersModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: UserExceptionFilter,
+    },
+  ],
   controllers: [],
 })
 export class AppModule { }

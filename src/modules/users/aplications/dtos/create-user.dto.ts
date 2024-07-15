@@ -1,10 +1,10 @@
 import { IsString, IsNotEmpty, IsArray, ValidateNested, IsObject, IsOptional, ArrayMinSize, IsBoolean, Length } from 'class-validator';
 import { Type } from 'class-transformer';
 import { WorkPlaceDTO } from './work-place.dto';
-import { CareTypeDto } from '../dto/care-type.dto';
+import { CareTypeDto } from './care-type.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RegisterUserDto {
+export class CreateUserDto {
 
     @ApiProperty({
         example: 'John Doe',
